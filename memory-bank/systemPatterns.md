@@ -2,15 +2,28 @@
 
 ## Architecture
 ```
-Client → Express Server → IP Detection → HTML Response
-                       ↘ /api/ip → JSON Response
+Client → Vercel Serverless (api/ip.js)
+           → x-forwarded-for ile IP al
+           → ip-api.com'a backend'den istek at
+           → { ip, protocol, city, country, isp } döndür
+Client → src/index.html → fetch('/api/ip') → kart UI'a yansıt
 ```
 
 ## Routes
-- `GET /` → HTML sayfası (IP gömülü)
-- `GET /api/ip` → `{ "ip": "x.x.x.x" }` (gelecek entegrasyonlar için)
+- `GET /` → `src/index.html` (vercel.json rewrite ile)
+- `GET /api/ip` → `{ ip, protocol, city, country, isp }`
 
 ## IP Resolution Order
-1. `x-forwarded-for` header (ilk IP, virgülle ayrılmış listede)
-2. `req.socket.remoteAddress`
-3. IPv4-mapped IPv6 prefix temizle
+1. `x-forwarded-for` header (ilk IP)
+2. `req.socket.remoteAddress` (fallback)
+
+## Tasarım Kararları
+- Kart (B) tasarımı
+- Dark/light: `prefers-color-scheme` + manuel toggle + localStorage
+- Skeleton loading: veriler gelene kadar CSS animasyonu
+- Kopyala: `navigator.clipboard.writeText` + geçici feedback
+
+## Deploy
+- Platform: Vercel
+- `api/` klasörü otomatik serverless function olarak tanınır
+- `vercel.json` ile `/` → `src/index.html` yönlendirmesi yapılıyor

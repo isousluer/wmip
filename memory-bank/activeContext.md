@@ -1,10 +1,12 @@
 # Active Context
 
 ## Current Status
-İlk kurulum tamamlandı. Temel IP gösterimi çalışıyor.
+Tüm temel özellikler tamamlandı. Proje Vercel'de canlıda.
+
+## Tasarım Kararları
+- Kart (B seçeneği) tasarımı benimsendi
+- Dark/light mode: sistem temasını takip eder + manuel toggle (localStorage'a kaydedilir)
+- Skeleton loading: veriler gelene kadar animasyonlu placeholder
 
 ## Next Steps
-- Konum bilgisi (ülke, şehir) eklenebilir
-- ISP bilgisi eklenebilir
-- Kopyala butonu eklenebilir
-- Dark/light mode
+- Kullanıcıdan gelecek yeni geliştirme talepleri
