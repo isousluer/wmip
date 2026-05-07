@@ -4,7 +4,7 @@
 Proje sadeleştirildi. Konum, ISP, protokol ve skeleton loading kaldırıldı. Minimal tasarıma dönüldü.
 
 ## Tasarım Kararları
-- Minimal: sadece IP, kopyala butonu, dark/light toggle
+- Minimal: sadece IP, kopyala butonu, dark/light toggle, 🌐 emoji favicon
 - Dark/light mode: sistem temasını takip eder + manuel toggle (localStorage'a kaydedilir)
 - Konum/ISP kaldırıldı (ip-api.com veri kalitesi yetersiz)
 

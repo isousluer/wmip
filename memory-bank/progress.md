@@ -8,7 +8,7 @@
 - [x] Vercel'e deploy edildi, canlıda çalışıyor
 - [x] Git ile versiyon kontrolü kuruldu
 - [x] Kopyala butonu ("Kopyalandı!" feedback'i ile)
-- [x] Dark/light mode (otomatik + manuel toggle, localStorage)
+- [x] Favicon (🌐 emoji, SVG data URI ile)
 
 ## Kaldırılanlar
 - Konum bilgisi (ip-api.com veri kalitesi yetersiz)
