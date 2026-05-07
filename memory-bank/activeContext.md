@@ -1,12 +1,12 @@
 # Active Context
 
 ## Current Status
-Tüm temel özellikler tamamlandı. Proje Vercel'de canlıda.
+Proje sadeleştirildi. Konum, ISP, protokol ve skeleton loading kaldırıldı. Minimal tasarıma dönüldü.
 
 ## Tasarım Kararları
-- Kart (B seçeneği) tasarımı benimsendi
+- Minimal: sadece IP, kopyala butonu, dark/light toggle
 - Dark/light mode: sistem temasını takip eder + manuel toggle (localStorage'a kaydedilir)
-- Skeleton loading: veriler gelene kadar animasyonlu placeholder
+- Konum/ISP kaldırıldı (ip-api.com veri kalitesi yetersiz)
 
 ## Next Steps
-- Kullanıcıdan gelecek yeni geliştirme talepleri
+- Kullanıcıdan gelecek yeni talepler

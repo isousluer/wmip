@@ -6,23 +6,19 @@
   <title>IP Adresim</title>
   <style>
     :root {
-      --bg: #f0f0f0;
-      --card: #ffffff;
+      --bg: #f5f5f5;
       --text-primary: #111111;
-      --text-secondary: #666666;
-      --border: #e0e0e0;
-      --copy-bg: #f5f5f5;
-      --copy-hover: #e8e8e8;
+      --text-secondary: #888888;
+      --btn-bg: #e8e8e8;
+      --btn-hover: #dcdcdc;
     }
 
     [data-theme="dark"] {
       --bg: #0f0f0f;
-      --card: #1a1a1a;
       --text-primary: #f0f0f0;
-      --text-secondary: #888888;
-      --border: #2a2a2a;
-      --copy-bg: #252525;
-      --copy-hover: #2f2f2f;
+      --text-secondary: #666666;
+      --btn-bg: #1f1f1f;
+      --btn-hover: #2a2a2a;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,133 +38,56 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--btn-bg);
+      border: none;
       border-radius: 8px;
       padding: 8px 10px;
       cursor: pointer;
       font-size: 1.1rem;
       line-height: 1;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.15s;
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 40px;
-      width: min(420px, 90vw);
-      transition: background 0.2s, border-color 0.2s;
+    .toggle:hover { background: var(--btn-hover); }
+
+    p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    .ip-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .ip {
-      font-size: clamp(1.6rem, 5vw, 2.2rem);
+    #ip {
+      font-size: clamp(2rem, 6vw, 3.5rem);
       font-weight: 700;
       color: var(--text-primary);
-      letter-spacing: 0.01em;
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      flex-shrink: 0;
-      background: var(--copy-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      transition: background 0.15s;
-      white-space: nowrap;
-    }
-
-    .copy-btn:hover { background: var(--copy-hover); }
-
-    .protocol {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+      letter-spacing: 0.02em;
       margin-bottom: 24px;
     }
 
-    .divider {
+    #copyBtn {
+      background: var(--btn-bg);
       border: none;
-      border-top: 1px solid var(--border);
-      margin-bottom: 20px;
-    }
-
-    .info-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .info-row:last-child { margin-bottom: 0; }
-
-    .info-icon { font-size: 1rem; width: 20px; text-align: center; }
-
-    .info-label {
-      font-size: 0.75rem;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
       color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      width: 60px;
-      flex-shrink: 0;
+      transition: background 0.15s;
     }
 
-    .info-value {
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-
-    .skeleton {
-      display: inline-block;
-      background: var(--border);
-      border-radius: 4px;
-      animation: pulse 1.2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+    #copyBtn:hover { background: var(--btn-hover); }
   </style>
 </head>
 <body>
-  <button class="toggle" id="themeToggle" title="Tema değiştir">🌙</button>
+  <button class="toggle" id="themeToggle">🌙</button>
 
-  <div class="card">
-    <div class="ip-row">
-      <div class="ip" id="ip"><span class="skeleton" style="width:180px;height:2.2rem;">&nbsp;</span></div>
-      <button class="copy-btn" id="copyBtn">Kopyala</button>
-    </div>
-    <div class="protocol" id="protocol"><span class="skeleton" style="width:40px;height:0.8rem;">&nbsp;</span></div>
-
-    <hr class="divider">
-
-    <div class="info-row">
-      <span class="info-icon">📍</span>
-      <span class="info-label">Konum</span>
-      <span class="info-value" id="location"><span class="skeleton" style="width:120px;height:0.95rem;">&nbsp;</span></span>
-    </div>
-    <div class="info-row">
-      <span class="info-icon">🏢</span>
-      <span class="info-label">ISP</span>
-      <span class="info-value" id="isp"><span class="skeleton" style="width:140px;height:0.95rem;">&nbsp;</span></span>
-    </div>
-  </div>
+  <p>IP Adresin</p>
+  <div id="ip">…</div>
+  <button id="copyBtn">Kopyala</button>
 
   <script>
-    // Theme
     const toggle = document.getElementById('themeToggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -177,8 +96,8 @@
       toggle.textContent = dark ? '☀️' : '🌙';
     }
 
-    let manualTheme = localStorage.getItem('theme');
-    applyTheme(manualTheme ? manualTheme === 'dark' : prefersDark.matches);
+    const saved = localStorage.getItem('theme');
+    applyTheme(saved ? saved === 'dark' : prefersDark.matches);
 
     toggle.addEventListener('click', () => {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -190,15 +109,10 @@
       if (!localStorage.getItem('theme')) applyTheme(e.matches);
     });
 
-    // Data
     fetch('/api/ip')
       .then(r => r.json())
       .then(d => {
-        document.getElementById('ip').textContent = d.ip || '—';
-        document.getElementById('protocol').textContent = d.protocol || '';
-        document.getElementById('location').textContent = [d.city, d.country].filter(Boolean).join(', ') || '—';
-        document.getElementById('isp').textContent = d.isp || '—';
-
+        document.getElementById('ip').textContent = d.ip;
         document.getElementById('copyBtn').addEventListener('click', () => {
           navigator.clipboard.writeText(d.ip).then(() => {
             const btn = document.getElementById('copyBtn');
